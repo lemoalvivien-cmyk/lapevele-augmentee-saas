@@ -1,0 +1,22 @@
+{
+  "name": "MarketplaceCategory",
+  "type": "object",
+  "description": "Catégorie de la marketplace territoriale",
+  "properties": {
+    "nom": { "type": "string", "title": "Nom de la catégorie" },
+    "slug": { "type": "string", "title": "Slug URL" },
+    "emoji": { "type": "string", "title": "Emoji", "maxLength": 4 },
+    "description": { "type": "string", "title": "Description", "maxLength": 200 },
+    "parent_id": { "type": "string", "title": "Catégorie parente (optionnel)" },
+    "couleur": { "type": "string", "title": "Couleur hex" },
+    "ordre": { "type": "number", "title": "Ordre d'affichage", "default": 0 },
+    "actif": { "type": "boolean", "title": "Actif", "default": true }
+  },
+  "required": ["nom", "slug"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": true,
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

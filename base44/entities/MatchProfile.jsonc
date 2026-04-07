@@ -1,0 +1,29 @@
+{
+  "name": "MatchProfile",
+  "type": "object",
+  "description": "Profil rencontre pro / networking pour les Flash Date Events",
+  "properties": {
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "prenom": { "type": "string", "title": "Prénom" },
+    "poste": { "type": "string", "title": "Poste / Fonction" },
+    "entreprise": { "type": "string", "title": "Entreprise" },
+    "secteur": { "type": "string", "title": "Secteur" },
+    "commune": { "type": "string", "title": "Commune" },
+    "bio_courte": { "type": "string", "title": "Bio courte", "maxLength": 280 },
+    "recherche": { "type": "string", "title": "Ce que je recherche", "maxLength": 280 },
+    "offre": { "type": "string", "title": "Ce que j'apporte", "maxLength": 280 },
+    "centres_interet": { "type": "array", "title": "Centres d'intérêt", "items": { "type": "string" } },
+    "photo_url": { "type": "string", "title": "Photo de profil" },
+    "visible": { "type": "boolean", "title": "Visible dans l'annuaire rencontres", "default": true },
+    "open_to_match": { "type": "boolean", "title": "Disponible pour Flash Date", "default": true },
+    "nb_matchs": { "type": "number", "title": "Matchs réalisés", "default": 0 },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["user_id", "prenom", "secteur", "commune"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "authenticated": true } },
+    "update": { "user_condition": { "field": "user_id" } },
+    "delete": { "user_condition": { "field": "user_id" } }
+  }
+}

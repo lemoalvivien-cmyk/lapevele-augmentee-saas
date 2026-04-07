@@ -1,0 +1,24 @@
+{
+  "name": "AmbassadorBadge",
+  "type": "object",
+  "description": "Badge ambassadeur attribué aux utilisateurs très actifs / parrains performants",
+  "properties": {
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "badge_type": {
+      "type": "string", "title": "Type de badge",
+      "enum": ["pionnier","connecteur","batiisseur","maitre_reseau","legende"],
+      "enumLabels": ["🌱 Pionnier","🔗 Connecteur","🏗️ Bâtisseur","🌐 Maître du réseau","⭐ Légende de Pévèle"]
+    },
+    "raison": { "type": "string", "title": "Raison d'attribution", "maxLength": 200 },
+    "nb_parrainages": { "type": "number", "title": "Nb parrainages à l'attribution", "default": 0 },
+    "visible_profil": { "type": "boolean", "title": "Affiché sur le profil", "default": true },
+    "attribue_at": { "type": "string", "format": "date-time", "title": "Date attribution" }
+  },
+  "required": ["user_id", "badge_type"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": true,
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

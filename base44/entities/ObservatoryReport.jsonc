@@ -1,0 +1,47 @@
+{
+  "name": "ObservatoryReport",
+  "type": "object",
+  "description": "Rapport d'observatoire territorial — analyse IA des dynamiques du territoire",
+  "properties": {
+    "commune": { "type": "string", "title": "Commune" },
+    "periode": { "type": "string", "title": "Période (ex: 2024-Q1)" },
+    "type_rapport": {
+      "type": "string", "title": "Type de rapport",
+      "enum": ["mensuel","trimestriel","annuel","flash","mandat"],
+      "enumLabels": ["Mensuel","Trimestriel","Annuel","Flash (urgent)","Rapport de mandat"]
+    },
+    "titre": { "type": "string", "title": "Titre du rapport" },
+    "resume_executif": { "type": "string", "title": "Résumé exécutif (IA)", "maxLength": 1000 },
+    "contenu_markdown": { "type": "string", "title": "Contenu complet (Markdown)" },
+    "stats_snapshot": {
+      "type": "object", "title": "Snapshot statistiques",
+      "properties": {
+        "nb_dossiers": { "type": "number" },
+        "nb_resolus": { "type": "number" },
+        "taux_resolution": { "type": "number" },
+        "nb_evenements": { "type": "number" },
+        "nb_citoyens_actifs": { "type": "number" },
+        "nb_entreprises": { "type": "number" },
+        "nb_introductions": { "type": "number" },
+        "mrr": { "type": "number" }
+      }
+    },
+    "signaux_faibles": { "type": "array", "title": "Signaux faibles détectés", "items": { "type": "string" } },
+    "recommandations": { "type": "array", "title": "Recommandations IA", "items": { "type": "string" } },
+    "niveau_ia": {
+      "type": "string", "title": "Niveau IA utilisé",
+      "enum": ["L1","L2","L3"],
+      "enumLabels": ["L1 (local)","L2 (Claude Sonnet)","L3 (Claude Opus)"]
+    },
+    "genere_par": { "type": "string", "title": "Généré par (user_id ou system)" },
+    "publie": { "type": "boolean", "title": "Rapport publié", "default": false },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date génération" }
+  },
+  "required": ["commune", "periode", "type_rapport", "titre"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "authenticated": true } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

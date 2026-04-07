@@ -1,0 +1,80 @@
+{
+  "name": "VictoryCard",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "dossier": {
+      "type": "string",
+      "title": "Dossier source (ID)"
+    },
+    "titre": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "resume": {
+      "type": "string",
+      "title": "R\u00e9sum\u00e9"
+    },
+    "angle_communication": {
+      "type": "string",
+      "title": "Angle de communication"
+    },
+    "texte_post": {
+      "type": "string",
+      "title": "Texte pr\u00eat \u00e0 publier"
+    },
+    "chiffre_cle": {
+      "type": "string",
+      "title": "Chiffre cl\u00e9 (ex: 3 semaines)"
+    },
+    "statut": {
+      "type": "string",
+      "title": "Statut",
+      "enum": [
+        "brouillon",
+        "valide",
+        "archive"
+      ],
+      "enumLabels": [
+        "Brouillon",
+        "Valid\u00e9",
+        "Archiv\u00e9"
+      ],
+      "default": "brouillon"
+    },
+    "generated_at": {
+      "type": "string",
+      "title": "G\u00e9n\u00e9r\u00e9e le"
+    }
+  },
+  "required": [
+    "commune",
+    "dossier",
+    "titre"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

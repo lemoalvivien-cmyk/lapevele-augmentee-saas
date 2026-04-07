@@ -1,0 +1,54 @@
+{
+  "name": "ServiceMunicipal",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "nom": {
+      "type": "string",
+      "title": "Nom du service"
+    },
+    "code": {
+      "type": "string",
+      "title": "Code interne"
+    },
+    "email_notification": {
+      "type": "string",
+      "title": "Email de notification"
+    },
+    "actif": {
+      "type": "boolean",
+      "title": "Actif",
+      "default": true
+    }
+  },
+  "required": [
+    "commune",
+    "nom",
+    "code"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

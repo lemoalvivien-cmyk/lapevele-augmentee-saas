@@ -1,0 +1,67 @@
+{
+  "name": "SubscriptionSnapshot",
+  "type": "object",
+  "properties": {
+    "commune_id": {
+      "type": "string",
+      "title": "ID commune"
+    },
+    "commune_nom": {
+      "type": "string",
+      "title": "Nom commune"
+    },
+    "plan_id": {
+      "type": "string",
+      "title": "ID plan BillingPlan"
+    },
+    "plan_tier": {
+      "type": "string",
+      "title": "Niveau du plan",
+      "enum": ["essentiel", "pro", "territoire"],
+      "enumLabels": ["Essentiel", "Pro", "Territoire"]
+    },
+    "stripe_sub_id": {
+      "type": "string",
+      "title": "ID abonnement Stripe"
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "title": "ID client Stripe"
+    },
+    "status": {
+      "type": "string",
+      "title": "Statut",
+      "enum": ["trialing", "active", "past_due", "canceled", "incomplete"],
+      "enumLabels": ["Essai", "Actif", "Paiement en retard", "Annulé", "Incomplet"],
+      "default": "trialing"
+    },
+    "started_at": {
+      "type": "string",
+      "title": "Date de début"
+    },
+    "ends_at": {
+      "type": "string",
+      "title": "Date de fin"
+    },
+    "trial_ends_at": {
+      "type": "string",
+      "title": "Fin de période d'essai"
+    },
+    "contact_email": {
+      "type": "string",
+      "title": "Email contact",
+      "format": "email"
+    },
+    "montant_mensuel": {
+      "type": "number",
+      "title": "Montant mensuel (€)"
+    }
+  },
+  "required": ["commune_id", "plan_tier", "status"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

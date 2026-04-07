@@ -1,0 +1,32 @@
+{
+  "name": "ReferralCode",
+  "type": "object",
+  "description": "Code de parrainage pour le programme de croissance virale",
+  "properties": {
+    "user_id": { "type": "string", "title": "Parrain (user_id)" },
+    "code": { "type": "string", "title": "Code unique", "maxLength": 12 },
+    "type_cible": {
+      "type": "string", "title": "Cible du parrainage",
+      "enum": ["citoyen","mairie","entreprise","sponsor"],
+      "enumLabels": ["Citoyen","Mairie","Entreprise","Sponsor"]
+    },
+    "nb_utilisations": { "type": "number", "title": "Utilisations", "default": 0 },
+    "nb_conversions": { "type": "number", "title": "Conversions", "default": 0 },
+    "reward_type": {
+      "type": "string", "title": "Type de récompense",
+      "enum": ["credit","mois_gratuit","badge","cashback","don_asso"],
+      "enumLabels": ["Crédit plateforme","1 mois offert","Badge ambassadeur","Cashback","Don à une association"]
+    },
+    "reward_value": { "type": "number", "title": "Valeur récompense (€ ou mois)" },
+    "actif": { "type": "boolean", "title": "Code actif", "default": true },
+    "expires_at": { "type": "string", "format": "date-time", "title": "Expire le" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["user_id", "code", "type_cible"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "field": "user_id" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

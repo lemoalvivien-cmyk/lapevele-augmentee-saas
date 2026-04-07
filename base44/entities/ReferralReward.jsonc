@@ -1,0 +1,27 @@
+{
+  "name": "ReferralReward",
+  "type": "object",
+  "description": "Récompense attribuée lors d'une conversion de parrainage",
+  "properties": {
+    "referral_code_id": { "type": "string", "title": "Code de parrainage" },
+    "parrain_user_id": { "type": "string", "title": "Parrain" },
+    "filleul_user_id": { "type": "string", "title": "Filleul" },
+    "reward_type": { "type": "string", "title": "Type récompense" },
+    "reward_value": { "type": "number", "title": "Valeur (€ ou mois)" },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["pending","attribue","expire"],
+      "enumLabels": ["En attente","Attribué","Expiré"],
+      "default": "pending"
+    },
+    "attribue_at": { "type": "string", "format": "date-time", "title": "Date attribution" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["referral_code_id", "parrain_user_id", "filleul_user_id"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "field": "parrain_user_id" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "StripeConnectAccount",
+  "type": "object",
+  "description": "Compte Stripe Connect d'un vendeur / facilitateur sur la marketplace",
+  "properties": {
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "stripe_account_id": { "type": "string", "title": "Stripe Account ID" },
+    "type_compte": {
+      "type": "string", "title": "Type de compte",
+      "enum": ["express","standard","custom"],
+      "enumLabels": ["Express (recommandé)","Standard","Custom"],
+      "default": "express"
+    },
+    "onboarding_complete": { "type": "boolean", "title": "Onboarding terminé", "default": false },
+    "charges_enabled": { "type": "boolean", "title": "Paiements activés", "default": false },
+    "payouts_enabled": { "type": "boolean", "title": "Virements activés", "default": false },
+    "email": { "type": "string", "title": "Email Stripe", "format": "email" },
+    "country": { "type": "string", "title": "Pays", "default": "FR" },
+    "currency": { "type": "string", "title": "Devise", "default": "eur" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["user_id", "stripe_account_id"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "field": "user_id" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

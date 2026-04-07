@@ -1,0 +1,47 @@
+{
+  "name": "AIRouterConfig",
+  "type": "object",
+  "properties": {
+    "level": {
+      "type": "string",
+      "title": "Niveau IA",
+      "enum": ["L1", "L2", "L3"],
+      "enumLabels": ["L1 - Instantané (Gemma/Mistral)", "L2 - Premium (Claude Sonnet/GPT-4o)", "L3 - Expert (Claude Opus/o1)"]
+    },
+    "model": {
+      "type": "string",
+      "title": "Modèle utilisé"
+    },
+    "max_cost_per_request": {
+      "type": "number",
+      "title": "Coût max par requête (€)"
+    },
+    "fallback_level": {
+      "type": "string",
+      "title": "Niveau de repli",
+      "enum": ["L1", "L2", "L3"]
+    },
+    "actif": {
+      "type": "boolean",
+      "title": "Actif",
+      "default": true
+    },
+    "modes": {
+      "type": "array",
+      "title": "Modes assignés à ce niveau",
+      "items": { "type": "string" }
+    },
+    "mrr_threshold": {
+      "type": "number",
+      "title": "Seuil MRR minimum pour activer (€)",
+      "default": 0
+    }
+  },
+  "required": ["level", "model"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ViralEvent",
+  "type": "object",
+  "description": "Événement viral — partage, invitation, mention qui déclenche une récompense",
+  "properties": {
+    "user_id": { "type": "string", "title": "Utilisateur source" },
+    "type_event": {
+      "type": "string", "title": "Type d'événement viral",
+      "enum": ["partage_lien","invitation_ami","mention_rs","témoignage","inscription_filleul","parrainage_mairie"],
+      "enumLabels": ["Partage de lien","Invitation d'un ami","Mention réseaux sociaux","Témoignage publié","Inscription filleul","Parrainage mairie"]
+    },
+    "referral_code": { "type": "string", "title": "Code parrainage utilisé" },
+    "target_user_id": { "type": "string", "title": "Utilisateur cible (si applicable)" },
+    "plateforme": { "type": "string", "title": "Plateforme (facebook, linkedin, etc.)" },
+    "points": { "type": "number", "title": "Points de viralité", "default": 1 },
+    "rewarded": { "type": "boolean", "title": "Récompense attribuée", "default": false },
+    "metadata": { "type": "object", "title": "Métadonnées supplémentaires" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date événement" }
+  },
+  "required": ["user_id", "type_event"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "field": "user_id" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

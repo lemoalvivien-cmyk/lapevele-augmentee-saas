@@ -1,0 +1,91 @@
+{
+  "name": "AllowedUser",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "role_cible": {
+      "type": "string",
+      "title": "R\u00f4le cible",
+      "enum": [
+        "operator",
+        "mayor",
+        "deputy",
+        "comms",
+        "interco_admin"
+      ],
+      "enumLabels": [
+        "Agent",
+        "Maire",
+        "Adjoint",
+        "Communication",
+        "Admin interco"
+      ]
+    },
+    "est_contact_principal": {
+      "type": "boolean",
+      "title": "Contact principal",
+      "default": false
+    },
+    "statut_activation": {
+      "type": "string",
+      "title": "Statut d'activation",
+      "enum": [
+        "authorized",
+        "active",
+        "suspended"
+      ],
+      "enumLabels": [
+        "Autoris\u00e9",
+        "Activ\u00e9",
+        "Suspendu"
+      ],
+      "default": "authorized"
+    },
+    "invited_at": {
+      "type": "string",
+      "title": "Date d'invitation"
+    },
+    "activated_at": {
+      "type": "string",
+      "title": "Date d'activation"
+    },
+    "notes_admin": {
+      "type": "string",
+      "title": "Notes admin"
+    }
+  },
+  "required": [
+    "commune",
+    "email",
+    "role_cible"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

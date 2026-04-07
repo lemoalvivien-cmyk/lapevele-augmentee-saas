@@ -1,0 +1,63 @@
+{
+  "name": "LeadDemo",
+  "type": "object",
+  "properties": {
+    "prenom": {
+      "type": "string",
+      "title": "Pr\u00e9nom"
+    },
+    "nom": {
+      "type": "string",
+      "title": "Nom"
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune ou collectivit\u00e9"
+    },
+    "fonction": {
+      "type": "string",
+      "title": "Fonction"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "telephone": {
+      "type": "string",
+      "title": "T\u00e9l\u00e9phone"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "traite": {
+      "type": "boolean",
+      "title": "Trait\u00e9",
+      "default": false
+    }
+  },
+  "required": [
+    "prenom",
+    "nom",
+    "commune",
+    "email"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Introduction",
+  "type": "object",
+  "description": "Mise en relation B2B facilitée WIINUP — machine à états DRAFT→PENDING→ACCEPTED→MEETING_SCHEDULED→WON/LOST/REJECTED",
+  "properties": {
+    "need_id": { "type": "string", "title": "Besoin associé" },
+    "offer_id": { "type": "string", "title": "Offre associée" },
+    "demandeur_user_id": { "type": "string", "title": "Utilisateur demandeur" },
+    "offreur_user_id": { "type": "string", "title": "Utilisateur offreur" },
+    "facilitator_id": { "type": "string", "title": "Facilitateur (optionnel)" },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["DRAFT","PENDING","ACCEPTED","MEETING_SCHEDULED","WON","LOST","REJECTED"],
+      "enumLabels": ["Brouillon","En attente de validation","Acceptée","Réunion planifiée","Deal conclu","Sans suite","Refusée"],
+      "default": "DRAFT"
+    },
+    "message_init": { "type": "string", "title": "Message d'introduction", "maxLength": 600 },
+    "message_offreur": { "type": "string", "title": "Réponse de l'offreur", "maxLength": 600 },
+    "date_meeting": { "type": "string", "format": "date-time", "title": "Date de la réunion" },
+    "lieu_meeting": { "type": "string", "title": "Lieu / lien visio" },
+    "outcome_note": { "type": "string", "title": "Note de clôture", "maxLength": 500 },
+    "commission_ht": { "type": "number", "title": "Commission facturée HT (€)", "default": 0 },
+    "stripe_payment_intent": { "type": "string", "title": "Stripe PaymentIntent ID" },
+    "commission_paid": { "type": "boolean", "title": "Commission encaissée", "default": false },
+    "nb_relances": { "type": "number", "title": "Nombre de relances", "default": 0 },
+    "last_action_at": { "type": "string", "format": "date-time", "title": "Dernière action" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["need_id", "demandeur_user_id", "offreur_user_id"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "fields_or": ["demandeur_user_id", "offreur_user_id", "facilitator_id"] } },
+    "update": { "user_condition": { "fields_or": ["demandeur_user_id", "offreur_user_id", "facilitator_id"] } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

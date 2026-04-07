@@ -1,0 +1,71 @@
+{
+  "name": "SponsorAccount",
+  "type": "object",
+  "properties": {
+    "nom": {
+      "type": "string",
+      "title": "Nom de l'entreprise"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email contact",
+      "format": "email"
+    },
+    "siret": {
+      "type": "string",
+      "title": "SIRET",
+      "maxLength": 14
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune principale"
+    },
+    "plan": {
+      "type": "string",
+      "title": "Plan sponsor",
+      "enum": ["basic", "premium", "exclusif"],
+      "enumLabels": ["Basic (97€/mois)", "Premium (297€/mois)", "Exclusif (790€/mois)"]
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "title": "ID client Stripe"
+    },
+    "stripe_sub_id": {
+      "type": "string",
+      "title": "ID abonnement Stripe"
+    },
+    "statut": {
+      "type": "string",
+      "title": "Statut",
+      "enum": ["actif", "suspendu", "expire", "en_attente"],
+      "enumLabels": ["Actif", "Suspendu", "Expiré", "En attente"],
+      "default": "en_attente"
+    },
+    "telephone": {
+      "type": "string",
+      "title": "Téléphone",
+      "maxLength": 20
+    },
+    "site_web": {
+      "type": "string",
+      "title": "Site web",
+      "maxLength": 200
+    },
+    "logo_url": {
+      "type": "string",
+      "title": "URL logo",
+      "maxLength": 2048
+    },
+    "created_at": {
+      "type": "string",
+      "title": "Date de création"
+    }
+  },
+  "required": ["nom", "email", "commune", "plan"],
+  "rls": {
+    "create": true,
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

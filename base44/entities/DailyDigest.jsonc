@@ -1,0 +1,65 @@
+{
+  "name": "DailyDigest",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "date_digest": {
+      "type": "string",
+      "title": "Date du digest"
+    },
+    "top_1": {
+      "type": "string",
+      "title": "Point n\u00b01"
+    },
+    "top_2": {
+      "type": "string",
+      "title": "Point n\u00b02"
+    },
+    "top_3": {
+      "type": "string",
+      "title": "Point n\u00b03"
+    },
+    "contenu_court": {
+      "type": "string",
+      "title": "Contenu court (IA)"
+    },
+    "genere_par_ia": {
+      "type": "boolean",
+      "title": "G\u00e9n\u00e9r\u00e9 par IA",
+      "default": false
+    },
+    "generated_at": {
+      "type": "string",
+      "title": "G\u00e9n\u00e9r\u00e9 le"
+    }
+  },
+  "required": [
+    "commune",
+    "date_digest"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

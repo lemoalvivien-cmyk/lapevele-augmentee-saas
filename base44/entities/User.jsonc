@@ -1,0 +1,37 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "title": "R\u00f4le",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "enumLabels": [
+        "Admin",
+        "Utilisateur"
+      ],
+      "default": "user"
+    }
+  },
+  "rls": {
+    "create": false,
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

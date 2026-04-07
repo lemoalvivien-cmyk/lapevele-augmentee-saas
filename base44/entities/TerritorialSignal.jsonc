@@ -1,0 +1,60 @@
+{
+  "name": "TerritorialSignal",
+  "type": "object",
+  "description": "Signal unifié du Graphe d'Intérêt Territorial — point d'entrée unique pour toute interaction (citoyen, entreprise, mairie, EPCI). Toute action critique de la plateforme émet un TerritorialSignal qui alimente la Lame de Décision.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "title": "Type de signal",
+      "enum": [
+        "signale", "propose", "aide", "participe", "match",
+        "achete", "vend", "sponsorise", "traite_dossier", "interesse_par",
+        "consulte", "partage", "vote", "reagit"
+      ]
+    },
+    "source_user_id": { "type": "string", "title": "User émetteur" },
+    "source_role": {
+      "type": "string",
+      "enum": ["citoyen", "entreprise", "mairie", "epci", "system", "anonyme"],
+      "default": "citoyen"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": ["lieu", "sujet", "user", "evenement", "transaction", "dossier", "listing", "sponsor"],
+      "title": "Type de cible"
+    },
+    "target_id": { "type": "string", "title": "ID de la cible" },
+    "payload": {
+      "type": "object",
+      "title": "Données spécifiques au type de signal",
+      "additionalProperties": true
+    },
+    "weight": { "type": "number", "title": "Poids 0-1", "default": 0.5 },
+    "commune": { "type": "string", "title": "Commune (slug)" },
+    "topic_tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "title": "Tags thématiques",
+      "default": []
+    },
+    "geo_lat": { "type": "number", "title": "Latitude" },
+    "geo_lng": { "type": "number", "title": "Longitude" },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Traité le (ingestion graphe)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Créé le"
+    }
+  },
+  "required": ["type", "source_user_id", "target_type"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

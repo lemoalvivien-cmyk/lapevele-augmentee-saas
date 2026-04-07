@@ -1,0 +1,55 @@
+{
+  "name": "BillingPlan",
+  "type": "object",
+  "properties": {
+    "nom": {
+      "type": "string",
+      "title": "Nom du plan"
+    },
+    "prix_mensuel": {
+      "type": "number",
+      "title": "Prix mensuel (€)"
+    },
+    "devise": {
+      "type": "string",
+      "title": "Devise",
+      "default": "EUR"
+    },
+    "stripe_product_id": {
+      "type": "string",
+      "title": "ID produit Stripe"
+    },
+    "stripe_price_id": {
+      "type": "string",
+      "title": "ID prix Stripe"
+    },
+    "tier": {
+      "type": "string",
+      "title": "Niveau",
+      "enum": ["essentiel", "pro", "territoire"],
+      "enumLabels": ["Essentiel (299€/mois)", "Pro (599€/mois)", "Territoire (999€/mois)"]
+    },
+    "features": {
+      "type": "array",
+      "title": "Fonctionnalités incluses",
+      "items": { "type": "string" }
+    },
+    "actif": {
+      "type": "boolean",
+      "title": "Plan actif",
+      "default": true
+    },
+    "description": {
+      "type": "string",
+      "title": "Description commerciale",
+      "maxLength": 500
+    }
+  },
+  "required": ["nom", "prix_mensuel", "tier"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": true,
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

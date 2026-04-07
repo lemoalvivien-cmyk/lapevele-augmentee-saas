@@ -1,0 +1,27 @@
+{
+  "name": "IntroductionProof",
+  "type": "object",
+  "description": "Preuve de réunion B2B — permet la facturation commission WIINUP",
+  "properties": {
+    "introduction_id": { "type": "string", "title": "Introduction associée" },
+    "uploaded_by": { "type": "string", "title": "Déposé par (user_id)" },
+    "type_preuve": {
+      "type": "string", "title": "Type de preuve",
+      "enum": ["screenshot","email","contrat","photo","autre"],
+      "enumLabels": ["Capture écran","Email","Contrat signé","Photo","Autre"]
+    },
+    "url": { "type": "string", "title": "URL de la preuve" },
+    "description": { "type": "string", "title": "Description", "maxLength": 300 },
+    "validated": { "type": "boolean", "title": "Validée par admin", "default": false },
+    "validated_by": { "type": "string", "title": "Validée par (admin user_id)" },
+    "validated_at": { "type": "string", "format": "date-time", "title": "Date validation" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date dépôt" }
+  },
+  "required": ["introduction_id", "uploaded_by", "type_preuve"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "field": "uploaded_by" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

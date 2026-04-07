@@ -1,0 +1,195 @@
+{
+  "name": "Dossier",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "type_action": {
+      "type": "string",
+      "title": "Type d'action",
+      "enum": [
+        "signaler",
+        "proposer",
+        "aider"
+      ],
+      "enumLabels": [
+        "Signaler un probl\u00e8me",
+        "Proposer une id\u00e9e",
+        "Proposer mon aide"
+      ]
+    },
+    "titre_public": {
+      "type": "string",
+      "title": "Titre public"
+    },
+    "description_brute": {
+      "type": "string",
+      "title": "Description brute (citoyen)",
+      "maxLength": 5000
+    },
+    "description_resumee": {
+      "type": "string",
+      "title": "Description r\u00e9sum\u00e9e (IA)",
+      "maxLength": 500
+    },
+    "categorie": {
+      "type": "string",
+      "title": "Cat\u00e9gorie"
+    },
+    "priorite": {
+      "type": "string",
+      "title": "Priorit\u00e9",
+      "enum": [
+        "basse",
+        "normale",
+        "haute",
+        "urgente"
+      ],
+      "enumLabels": [
+        "Basse",
+        "Normale",
+        "Haute",
+        "Urgente"
+      ],
+      "default": "normale"
+    },
+    "quartier": {
+      "type": "string",
+      "title": "Quartier"
+    },
+    "adresse": {
+      "type": "string",
+      "title": "Adresse",
+      "maxLength": 200
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "service_suggere": {
+      "type": "string",
+      "title": "Service sugg\u00e9r\u00e9 (IA)"
+    },
+    "service_assigne": {
+      "type": "string",
+      "title": "Service assign\u00e9 (mairie)"
+    },
+    "statut": {
+      "type": "string",
+      "title": "Statut",
+      "enum": [
+        "nouveau",
+        "qualifie",
+        "en_cours",
+        "resolu",
+        "rejete"
+      ],
+      "enumLabels": [
+        "Nouveau",
+        "Qualifi\u00e9",
+        "En cours",
+        "R\u00e9solu",
+        "Rejet\u00e9"
+      ],
+      "default": "nouveau"
+    },
+    "email_citoyen": {
+      "type": "string",
+      "title": "Email du citoyen",
+      "format": "email"
+    },
+    "nom_citoyen": {
+      "type": "string",
+      "title": "Nom du citoyen",
+      "maxLength": 100
+    },
+    "photo_avant": {
+      "type": "string",
+      "title": "Photo avant URL",
+      "maxLength": 2048
+    },
+    "photo_apres": {
+      "type": "string",
+      "title": "Photo apr\u00e8s URL",
+      "maxLength": 2048
+    },
+    "note_satisfaction": {
+      "type": "number",
+      "title": "Note satisfaction (1-5)",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "commentaire_satisfaction": {
+      "type": "string",
+      "title": "Commentaire satisfaction",
+      "maxLength": 500
+    },
+    "visible_place_du_village": {
+      "type": "boolean",
+      "title": "Visible place du village",
+      "default": false
+    },
+    "ai_confidence": {
+      "type": "number",
+      "title": "Confiance IA (0-1)",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "ai_needs_review": {
+      "type": "boolean",
+      "title": "N\u00e9cessite r\u00e9vision humaine",
+      "default": false
+    },
+    "resolved_at": {
+      "type": "string",
+      "title": "Date de r\u00e9solution"
+    }
+  },
+  "required": [
+    "commune",
+    "type_action",
+    "titre_public",
+    "description_brute",
+    "email_citoyen"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "$and": [
+        {
+          "$or": [
+            {
+              "email_citoyen": "{{user.email}}"
+            },
+            {
+              "user_condition": {
+                "role": "admin"
+              }
+            }
+          ]
+        },
+        {
+          "commune": {
+            "$exists": true
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

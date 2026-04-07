@@ -1,0 +1,104 @@
+{
+  "name": "EvenementLocal",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "titre": {
+      "type": "string",
+      "title": "Titre",
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "maxLength": 2000
+    },
+    "categorie": {
+      "type": "string",
+      "title": "Cat\u00e9gorie"
+    },
+    "date_debut": {
+      "type": "string",
+      "title": "Date de d\u00e9but"
+    },
+    "date_fin": {
+      "type": "string",
+      "title": "Date de fin"
+    },
+    "lieu": {
+      "type": "string",
+      "title": "Lieu",
+      "maxLength": 200
+    },
+    "quartier": {
+      "type": "string",
+      "title": "Quartier"
+    },
+    "image": {
+      "type": "string",
+      "title": "Image URL",
+      "maxLength": 2048
+    },
+    "est_public": {
+      "type": "boolean",
+      "title": "Public",
+      "default": true
+    },
+    "est_epingle": {
+      "type": "boolean",
+      "title": "\u00c9pingl\u00e9",
+      "default": false
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Cr\u00e9\u00e9 par (email)"
+    }
+  },
+  "required": [
+    "commune",
+    "titre",
+    "date_debut"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "est_public": true
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

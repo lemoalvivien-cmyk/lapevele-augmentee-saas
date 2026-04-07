@@ -1,0 +1,27 @@
+{
+  "name": "MatchRequest",
+  "type": "object",
+  "description": "Demande de mise en relation réseau / Flash Date entre deux profils",
+  "properties": {
+    "from_user_id": { "type": "string", "title": "Initiateur" },
+    "to_user_id": { "type": "string", "title": "Destinataire" },
+    "flash_date_event_id": { "type": "string", "title": "Événement Flash Date (optionnel)" },
+    "message": { "type": "string", "title": "Message d'approche", "maxLength": 300 },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["pending","accepted","declined","met"],
+      "enumLabels": ["En attente","Acceptée","Déclinée","Rencontre faite"],
+      "default": "pending"
+    },
+    "affinity_score": { "type": "number", "title": "Score d'affinité (0-100)", "default": 0 },
+    "meeting_date": { "type": "string", "format": "date-time", "title": "Date de rencontre" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date demande" }
+  },
+  "required": ["from_user_id", "to_user_id"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "fields_or": ["from_user_id", "to_user_id"] } },
+    "update": { "user_condition": { "fields_or": ["from_user_id", "to_user_id"] } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

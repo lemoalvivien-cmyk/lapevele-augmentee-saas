@@ -1,0 +1,124 @@
+{
+  "name": "VillagePost",
+  "type": "object",
+  "properties": {
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "type_post": {
+      "type": "string",
+      "title": "Type de post",
+      "enum": [
+        "victoire",
+        "appel_aide",
+        "actualite",
+        "merci_local",
+        "message_maire"
+      ],
+      "enumLabels": [
+        "Victoire",
+        "Appel \u00e0 l'aide",
+        "Actualit\u00e9",
+        "Merci local",
+        "Message du maire"
+      ]
+    },
+    "titre": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "resume": {
+      "type": "string",
+      "title": "R\u00e9sum\u00e9 court"
+    },
+    "contenu": {
+      "type": "string",
+      "title": "Contenu complet"
+    },
+    "image": {
+      "type": "string",
+      "title": "Image URL",
+      "maxLength": 2048
+    },
+    "quartier": {
+      "type": "string",
+      "title": "Quartier"
+    },
+    "dossier_source": {
+      "type": "string",
+      "title": "Dossier source (ID)"
+    },
+    "est_epingle": {
+      "type": "boolean",
+      "title": "\u00c9pingl\u00e9",
+      "default": false
+    },
+    "est_public": {
+      "type": "boolean",
+      "title": "Public",
+      "default": true
+    },
+    "published_at": {
+      "type": "string",
+      "title": "Date de publication"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Cr\u00e9\u00e9 par (email)"
+    },
+    "date_souhaitee": {
+      "type": "string",
+      "title": "Date souhait\u00e9e (appel aide)"
+    },
+    "type_aide": {
+      "type": "string",
+      "title": "Type d'aide recherch\u00e9e"
+    }
+  },
+  "required": [
+    "commune",
+    "type_post",
+    "titre",
+    "contenu"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "est_public": true
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

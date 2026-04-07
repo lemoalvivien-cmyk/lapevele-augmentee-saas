@@ -1,0 +1,49 @@
+{
+  "name": "WhitelistEmail",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune rattach\u00e9e"
+    },
+    "nom_contact": {
+      "type": "string",
+      "title": "Nom du contact"
+    },
+    "activated": {
+      "type": "boolean",
+      "title": "Activ\u00e9",
+      "default": false
+    }
+  },
+  "required": [
+    "email",
+    "commune"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

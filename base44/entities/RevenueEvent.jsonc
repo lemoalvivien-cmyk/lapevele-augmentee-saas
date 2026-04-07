@@ -1,0 +1,56 @@
+{
+  "name": "RevenueEvent",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "title": "Type d'événement",
+      "enum": ["subscription_created", "subscription_renewed", "subscription_canceled", "sponsor_payment", "marketplace_commission", "b2b_fee", "one_time"],
+      "enumLabels": ["Abonnement créé", "Abonnement renouvelé", "Abonnement annulé", "Paiement sponsor", "Commission marketplace", "Frais B2B", "Paiement unique"]
+    },
+    "montant": {
+      "type": "number",
+      "title": "Montant (€)"
+    },
+    "produit": {
+      "type": "string",
+      "title": "Produit / Plan",
+      "enum": ["mairie_essentiel", "mairie_pro", "mairie_territoire", "sponsor_basic", "sponsor_premium", "marketplace", "b2b_wiinup"],
+      "enumLabels": ["Mairie Essentiel", "Mairie Pro", "Mairie Territoire", "Sponsor Basic", "Sponsor Premium", "Marketplace", "B2B WIINUP"]
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune concernée"
+    },
+    "source": {
+      "type": "string",
+      "title": "Source",
+      "enum": ["stripe_webhook", "manual", "api"],
+      "enumLabels": ["Stripe Webhook", "Manuel", "API"]
+    },
+    "stripe_ref": {
+      "type": "string",
+      "title": "Référence Stripe (PI/sub ID)"
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "title": "ID client Stripe"
+    },
+    "timestamp": {
+      "type": "string",
+      "title": "Horodatage ISO"
+    },
+    "metadata": {
+      "type": "string",
+      "title": "Métadonnées JSON",
+      "maxLength": 2000
+    }
+  },
+  "required": ["type", "montant", "source", "timestamp"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": false
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "DashboardConfig",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "title": "ID utilisateur"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email",
+      "format": "email"
+    },
+    "widgets_actifs": {
+      "type": "array",
+      "title": "Widgets actifs",
+      "items": {
+        "type": "string",
+        "enum": ["emploi_offres", "evenements", "place_village", "signalements", "b2b_besoins", "associations", "services", "observatoire", "mairie_news", "meteo_locale"]
+      }
+    },
+    "ordre_widgets": {
+      "type": "string",
+      "title": "Ordre des widgets (JSON)",
+      "maxLength": 1000
+    },
+    "notifications_email": {
+      "type": "boolean",
+      "title": "Notifications email",
+      "default": true
+    },
+    "digest_hebdo": {
+      "type": "boolean",
+      "title": "Digest hebdomadaire",
+      "default": true
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "updated_at": {
+      "type": "string",
+      "title": "Dernière mise à jour"
+    }
+  },
+  "required": ["user_id", "email"],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        { "email": "{{user.email}}" },
+        { "user_condition": { "role": "admin" } }
+      ]
+    },
+    "update": {
+      "$or": [
+        { "email": "{{user.email}}" },
+        { "user_condition": { "role": "admin" } }
+      ]
+    },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "BusinessNeed",
+  "type": "object",
+  "description": "Besoin B2B exprimé par une entreprise — recherche fournisseur, prestataire, partenaire",
+  "properties": {
+    "business_profile_id": { "type": "string", "title": "Profil entreprise" },
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "titre": { "type": "string", "title": "Intitulé du besoin", "maxLength": 120 },
+    "description": { "type": "string", "title": "Description détaillée", "maxLength": 1000 },
+    "type_besoin": {
+      "type": "string", "title": "Type de besoin",
+      "enum": ["fournisseur","prestataire","partenariat","recrutement","financement","client","autre"],
+      "enumLabels": ["Fournisseur","Prestataire de service","Partenariat","Recrutement","Financement","Trouver des clients","Autre"]
+    },
+    "secteur_cible": { "type": "string", "title": "Secteur recherché" },
+    "budget_indicatif": { "type": "string", "title": "Budget indicatif" },
+    "commune": { "type": "string", "title": "Commune" },
+    "perimetre": {
+      "type": "string", "title": "Périmètre géographique",
+      "enum": ["commune","pevele","dept","regional","national"],
+      "enumLabels": ["Ma commune","Pévèle Carembault","Département Nord","Région HdF","National"]
+    },
+    "urgence": {
+      "type": "string", "title": "Urgence",
+      "enum": ["faible","normale","urgente"],
+      "enumLabels": ["Pas urgent","Sous 3 mois","Urgent (< 1 mois)"]
+    },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["actif","en_cours","satisfait","expire","annule"],
+      "enumLabels": ["Actif","En cours de traitement","Besoin satisfait","Expiré","Annulé"],
+      "default": "actif"
+    },
+    "expires_at": { "type": "string", "format": "date-time", "title": "Expire le" },
+    "nb_vues": { "type": "number", "title": "Nombre de vues", "default": 0 },
+    "nb_introductions": { "type": "number", "title": "Introductions reçues", "default": 0 },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date de publication" }
+  },
+  "required": ["user_id", "titre", "type_besoin", "commune"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": true,
+    "update": { "user_condition": { "field": "user_id" } },
+    "delete": { "user_condition": { "field": "user_id" } }
+  }
+}

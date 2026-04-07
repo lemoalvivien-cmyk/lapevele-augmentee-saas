@@ -1,0 +1,29 @@
+{
+  "name": "ReputationScore",
+  "type": "object",
+  "description": "Score de réputation B2B calculé — basé sur introductions, preuves, avis",
+  "properties": {
+    "business_profile_id": { "type": "string", "title": "Profil entreprise" },
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "score_global": { "type": "number", "title": "Score global (0-100)", "default": 50 },
+    "nb_introductions_won": { "type": "number", "title": "Deals gagnés", "default": 0 },
+    "nb_introductions_total": { "type": "number", "title": "Total introductions", "default": 0 },
+    "nb_avis": { "type": "number", "title": "Nombre d'avis", "default": 0 },
+    "moyenne_avis": { "type": "number", "title": "Moyenne des avis (1-5)", "default": 0 },
+    "nb_preuves_validees": { "type": "number", "title": "Preuves validées", "default": 0 },
+    "badge": {
+      "type": "string", "title": "Badge obtenu",
+      "enum": ["debutant","actif","confirme","expert","elite"],
+      "enumLabels": ["Débutant","Actif","Confirmé","Expert","Élite"],
+      "default": "debutant"
+    },
+    "updated_at": { "type": "string", "format": "date-time", "title": "Dernière mise à jour" }
+  },
+  "required": ["business_profile_id", "user_id"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": true,
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

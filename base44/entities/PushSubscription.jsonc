@@ -1,0 +1,30 @@
+{
+  "name": "PushSubscription",
+  "type": "object",
+  "description": "Abonnement aux notifications push Web / PWA",
+  "properties": {
+    "user_id": { "type": "string", "title": "Utilisateur (optionnel si anonyme)" },
+    "session_id": { "type": "string", "title": "Session anonyme" },
+    "endpoint": { "type": "string", "title": "Push endpoint URL" },
+    "p256dh": { "type": "string", "title": "Clé publique p256dh" },
+    "auth": { "type": "string", "title": "Auth secret" },
+    "commune": { "type": "string", "title": "Commune d'intérêt" },
+    "topics": {
+      "type": "array", "title": "Thèmes abonnés",
+      "items": {
+        "type": "string",
+        "enum": ["alertes","evenements","dossiers","b2b","marketplace","digest"]
+      }
+    },
+    "actif": { "type": "boolean", "title": "Abonnement actif", "default": true },
+    "nb_envois": { "type": "number", "title": "Notifications envoyées", "default": 0 },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date inscription" }
+  },
+  "required": ["endpoint", "p256dh", "auth"],
+  "rls": {
+    "create": true,
+    "read": { "user_condition": { "field": "user_id" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "FacilitatorProfile",
+  "type": "object",
+  "description": "Profil facilitateur / ambassadeur WIINUP — gère des introductions B2B",
+  "properties": {
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "nom": { "type": "string", "title": "Nom complet" },
+    "bio": { "type": "string", "title": "Bio", "maxLength": 400 },
+    "commune": { "type": "string", "title": "Commune principale" },
+    "secteurs": { "type": "array", "title": "Secteurs d'expertise", "items": { "type": "string" } },
+    "nb_introductions": { "type": "number", "title": "Introductions réalisées", "default": 0 },
+    "nb_won": { "type": "number", "title": "Deals conclus", "default": 0 },
+    "taux_succes": { "type": "number", "title": "Taux de succès (%)", "default": 0 },
+    "commission_percent": { "type": "number", "title": "Part commission (%)", "default": 30 },
+    "stripe_connect_id": { "type": "string", "title": "Stripe Connect Account ID" },
+    "actif": { "type": "boolean", "title": "Actif", "default": true },
+    "photo_url": { "type": "string", "title": "Photo de profil" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date inscription" }
+  },
+  "required": ["user_id", "nom", "commune"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": true,
+    "update": { "user_condition": { "field": "user_id" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

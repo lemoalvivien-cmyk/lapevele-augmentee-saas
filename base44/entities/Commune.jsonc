@@ -1,0 +1,103 @@
+{
+  "name": "Commune",
+  "type": "object",
+  "properties": {
+    "nom": {
+      "type": "string",
+      "title": "Nom"
+    },
+    "slug": {
+      "type": "string",
+      "title": "Slug (URL)"
+    },
+    "type_collectivite": {
+      "type": "string",
+      "title": "Type de collectivit\u00e9",
+      "enum": [
+        "commune",
+        "intercommunalite"
+      ],
+      "enumLabels": [
+        "Commune",
+        "Intercommunalit\u00e9"
+      ]
+    },
+    "logo": {
+      "type": "string",
+      "title": "Logo URL"
+    },
+    "photo_hero": {
+      "type": "string",
+      "title": "Photo du hero (URL)",
+      "maxLength": 2048
+    },
+    "couleur_primaire": {
+      "type": "string",
+      "title": "Couleur primaire (hex)"
+    },
+    "email_contact": {
+      "type": "string",
+      "title": "Email de contact"
+    },
+    "telephone_contact": {
+      "type": "string",
+      "title": "T\u00e9l\u00e9phone"
+    },
+    "adresse_mairie": {
+      "type": "string",
+      "title": "Adresse mairie"
+    },
+    "message_bienvenue_public": {
+      "type": "string",
+      "title": "Message de bienvenue public"
+    },
+    "message_du_maire": {
+      "type": "string",
+      "title": "Message du maire"
+    },
+    "quartier_labels": {
+      "type": "string",
+      "title": "Quartiers (s\u00e9par\u00e9s par virgule)"
+    },
+    "statut": {
+      "type": "string",
+      "title": "Statut",
+      "enum": [
+        "prospect",
+        "active",
+        "suspended",
+        "archived"
+      ],
+      "enumLabels": [
+        "Prospect",
+        "Active",
+        "Suspendue",
+        "Archiv\u00e9e"
+      ],
+      "default": "prospect"
+    }
+  },
+  "required": [
+    "nom",
+    "slug",
+    "type_collectivite"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

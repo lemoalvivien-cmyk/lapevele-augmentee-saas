@@ -1,0 +1,68 @@
+{
+  "name": "DossierUpdate",
+  "type": "object",
+  "properties": {
+    "dossier": {
+      "type": "string",
+      "title": "Dossier (ID)"
+    },
+    "auteur": {
+      "type": "string",
+      "title": "Auteur (email)"
+    },
+    "type_update": {
+      "type": "string",
+      "title": "Type de mise \u00e0 jour",
+      "enum": [
+        "interne",
+        "public",
+        "statut",
+        "photo",
+        "commentaire"
+      ],
+      "enumLabels": [
+        "Note interne",
+        "Message public",
+        "Changement de statut",
+        "Photo",
+        "Commentaire"
+      ]
+    },
+    "contenu": {
+      "type": "string",
+      "title": "Contenu"
+    },
+    "visible_citoyen": {
+      "type": "boolean",
+      "title": "Visible par le citoyen",
+      "default": false
+    }
+  },
+  "required": [
+    "dossier",
+    "type_update",
+    "contenu"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

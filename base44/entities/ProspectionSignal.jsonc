@@ -1,0 +1,40 @@
+{
+  "name": "ProspectionSignal",
+  "type": "object",
+  "description": "Signal de prospection B2B — création entreprise (BODACC), recrutement, levée de fonds, appel d'offre",
+  "properties": {
+    "source": {
+      "type": "string", "title": "Source du signal",
+      "enum": ["bodacc","linkedin","job_board","appel_offre","presse","interne","autre"],
+      "enumLabels": ["BODACC (création/modification)","LinkedIn","Job Board","Appel d'offre public","Presse locale","Signal interne","Autre"]
+    },
+    "type_signal": {
+      "type": "string", "title": "Type de signal",
+      "enum": ["creation_entreprise","recrutement","levee_fonds","appel_offre","demenagement","croissance","autre"],
+      "enumLabels": ["Création d'entreprise","Recrutement actif","Levée de fonds","Appel d'offre","Déménagement","Forte croissance","Autre"]
+    },
+    "nom_entreprise": { "type": "string", "title": "Nom de l'entreprise" },
+    "siret": { "type": "string", "title": "SIRET" },
+    "commune": { "type": "string", "title": "Commune" },
+    "secteur": { "type": "string", "title": "Secteur" },
+    "description": { "type": "string", "title": "Description du signal", "maxLength": 500 },
+    "url_source": { "type": "string", "title": "URL source" },
+    "score_pertinence": { "type": "number", "title": "Score pertinence (0-100)", "default": 50 },
+    "assigne_a": { "type": "string", "title": "Assigné à (user_id)" },
+    "statut": {
+      "type": "string", "title": "Statut traitement",
+      "enum": ["nouveau","en_cours","contacte","sans_suite","converti"],
+      "enumLabels": ["Nouveau","En cours de traitement","Entreprise contactée","Sans suite","Converti en introduction"],
+      "default": "nouveau"
+    },
+    "date_signal": { "type": "string", "format": "date-time", "title": "Date du signal" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date import" }
+  },
+  "required": ["source", "type_signal", "nom_entreprise"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "authenticated": true } },
+    "update": { "user_condition": { "authenticated": true } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

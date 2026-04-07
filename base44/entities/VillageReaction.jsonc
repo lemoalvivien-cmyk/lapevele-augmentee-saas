@@ -1,0 +1,68 @@
+{
+  "name": "VillageReaction",
+  "type": "object",
+  "properties": {
+    "village_post": {
+      "type": "string",
+      "title": "Publication (ID)"
+    },
+    "type_reaction": {
+      "type": "string",
+      "title": "Type de r\u00e9action",
+      "enum": [
+        "merci",
+        "present",
+        "je_peux_aider"
+      ],
+      "enumLabels": [
+        "Merci !",
+        "Je suis pr\u00e9sent",
+        "Je peux aider"
+      ]
+    },
+    "user_name": {
+      "type": "string",
+      "title": "Nom"
+    },
+    "user_email": {
+      "type": "string",
+      "title": "Email"
+    }
+  },
+  "required": [
+    "village_post",
+    "type_reaction"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

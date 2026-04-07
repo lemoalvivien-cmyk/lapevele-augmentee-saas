@@ -1,0 +1,58 @@
+{
+  "name": "IntentSignal",
+  "type": "object",
+  "properties": {
+    "intent": {
+      "type": "string",
+      "title": "Intention détectée",
+      "enum": ["emploi", "formation", "entreprendre", "mairie_plus", "sponsor", "b2b", "aide_sociale", "evenement", "signalement"],
+      "enumLabels": ["Emploi", "Formation", "Entreprendre", "Mairie+", "Sponsor", "B2B", "Aide sociale", "Événement", "Signalement"]
+    },
+    "confidence": {
+      "type": "number",
+      "title": "Score de confiance (0-1)",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "source": {
+      "type": "string",
+      "title": "Source du signal",
+      "enum": ["public_assistant", "search", "page_visit", "form_start"],
+      "enumLabels": ["Assistant public", "Recherche", "Visite page", "Début formulaire"]
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "session_id": {
+      "type": "string",
+      "title": "ID session anonyme"
+    },
+    "user_input": {
+      "type": "string",
+      "title": "Texte saisi (tronqué)",
+      "maxLength": 200
+    },
+    "suggestion_shown": {
+      "type": "string",
+      "title": "Suggestion CTA affichée",
+      "maxLength": 300
+    },
+    "cta_clicked": {
+      "type": "boolean",
+      "title": "CTA cliqué",
+      "default": false
+    },
+    "timestamp": {
+      "type": "string",
+      "title": "Horodatage"
+    }
+  },
+  "required": ["intent", "confidence", "source", "timestamp"],
+  "rls": {
+    "create": true,
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

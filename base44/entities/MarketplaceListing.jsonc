@@ -1,0 +1,45 @@
+{
+  "name": "MarketplaceListing",
+  "type": "object",
+  "description": "Annonce sur la marketplace territoriale — produit, service, bien d'occasion, cours, location",
+  "properties": {
+    "user_id": { "type": "string", "title": "Vendeur / prestataire" },
+    "titre": { "type": "string", "title": "Titre de l'annonce", "maxLength": 100 },
+    "description": { "type": "string", "title": "Description", "maxLength": 1200 },
+    "categorie_id": { "type": "string", "title": "Catégorie" },
+    "type_annonce": {
+      "type": "string", "title": "Type",
+      "enum": ["vente","service","location","don","cours","troc"],
+      "enumLabels": ["Vente","Service","Location","Don","Cours / Formation","Troc"]
+    },
+    "prix": { "type": "number", "title": "Prix (€)" },
+    "prix_type": {
+      "type": "string", "title": "Type de prix",
+      "enum": ["fixe","negociable","heure","jour","forfait","gratuit"],
+      "enumLabels": ["Prix fixe","Négociable","Par heure","Par jour","Forfait","Gratuit"]
+    },
+    "images": { "type": "array", "title": "Photos", "items": { "type": "string" } },
+    "commune": { "type": "string", "title": "Commune" },
+    "commune_slug": { "type": "string", "title": "Slug commune" },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["actif","reserve","vendu","expire","archive"],
+      "enumLabels": ["Actif","Réservé","Vendu/Terminé","Expiré","Archivé"],
+      "default": "actif"
+    },
+    "stripe_connect_account": { "type": "string", "title": "Stripe Connect vendeur" },
+    "commission_rate": { "type": "number", "title": "Taux commission plateforme (%)", "default": 8 },
+    "nb_vues": { "type": "number", "title": "Vues", "default": 0 },
+    "nb_contacts": { "type": "number", "title": "Contacts", "default": 0 },
+    "tags": { "type": "array", "title": "Tags", "items": { "type": "string" } },
+    "expires_at": { "type": "string", "format": "date-time", "title": "Date d'expiration" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date publication" }
+  },
+  "required": ["user_id", "titre", "type_annonce", "commune"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": true,
+    "update": { "user_condition": { "field": "user_id" } },
+    "delete": { "user_condition": { "field": "user_id" } }
+  }
+}

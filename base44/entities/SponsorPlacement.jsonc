@@ -1,0 +1,81 @@
+{
+  "name": "SponsorPlacement",
+  "type": "object",
+  "properties": {
+    "sponsor_id": {
+      "type": "string",
+      "title": "ID SponsorAccount"
+    },
+    "sponsor_nom": {
+      "type": "string",
+      "title": "Nom du sponsor"
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "rubrique": {
+      "type": "string",
+      "title": "Rubrique d'affichage",
+      "enum": ["emploi", "services", "agenda", "place_village", "observatoire", "landing"],
+      "enumLabels": ["Emploi & Business", "Services", "Agenda", "Place du village", "Observatoire", "Landing page"]
+    },
+    "titre": {
+      "type": "string",
+      "title": "Titre du message sponsor",
+      "maxLength": 100
+    },
+    "contenu": {
+      "type": "string",
+      "title": "Contenu (accroche)",
+      "maxLength": 300
+    },
+    "cta_label": {
+      "type": "string",
+      "title": "Label du CTA",
+      "maxLength": 50
+    },
+    "cta_url": {
+      "type": "string",
+      "title": "URL du CTA",
+      "maxLength": 500
+    },
+    "logo_url": {
+      "type": "string",
+      "title": "URL logo",
+      "maxLength": 2048
+    },
+    "date_debut": {
+      "type": "string",
+      "title": "Date de début"
+    },
+    "date_fin": {
+      "type": "string",
+      "title": "Date de fin"
+    },
+    "statut": {
+      "type": "string",
+      "title": "Statut",
+      "enum": ["actif", "suspendu", "expire", "en_attente"],
+      "enumLabels": ["Actif", "Suspendu", "Expiré", "En attente validation"],
+      "default": "en_attente"
+    },
+    "impressions": {
+      "type": "number",
+      "title": "Nombre d'impressions",
+      "default": 0
+    },
+    "clics": {
+      "type": "number",
+      "title": "Nombre de clics",
+      "default": 0
+    }
+  },
+  "required": ["commune", "rubrique", "titre", "statut"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": true,
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "name": "PropositionEvenement",
+  "type": "object",
+  "properties": {
+    "titre": {
+      "type": "string",
+      "title": "Titre"
+    },
+    "categorie": {
+      "type": "string",
+      "title": "Cat\u00e9gorie"
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "date_heure": {
+      "type": "string",
+      "title": "Date et heure"
+    },
+    "lieu": {
+      "type": "string",
+      "title": "Lieu"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "quartier": {
+      "type": "string",
+      "title": "Quartier"
+    },
+    "prenom_proposant": {
+      "type": "string",
+      "title": "Pr\u00e9nom du proposant"
+    },
+    "email_proposant": {
+      "type": "string",
+      "title": "Email du proposant"
+    },
+    "statut": {
+      "type": "string",
+      "title": "Statut",
+      "enum": [
+        "en_attente",
+        "acceptee",
+        "refusee"
+      ],
+      "enumLabels": [
+        "En attente",
+        "Accept\u00e9e",
+        "Refus\u00e9e"
+      ],
+      "default": "en_attente"
+    }
+  },
+  "required": [
+    "titre",
+    "commune",
+    "date_heure",
+    "prenom_proposant"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

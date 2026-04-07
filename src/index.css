@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm cream background */
+    --background: 30 100% 97%;
+    --foreground: 247 40% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 247 40% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 247 40% 16%;
+
+    /* Solar orange as primary action */
+    --primary: 24 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 80% 94%;
+    --secondary-foreground: 247 40% 16%;
+
+    --muted: 30 50% 93%;
+    --muted-foreground: 247 20% 45%;
+
+    /* Pop yellow as accent */
+    --accent: 44 100% 65%;
+    --accent-foreground: 247 40% 16%;
+
+    --destructive: 0 90% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 30% 86%;
+    --input: 30 30% 86%;
+    --ring: 24 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Brand tokens */
+    --ink: #1D1836;
+    --orange: #FF6A00;
+    --yellow: #FFD84D;
+    --blue: #63C7FF;
+    --pink: #FF6FB5;
+    --cream: #FFF8F1;
+  }
+
+  .dark {
+    --background: 247 40% 10%;
+    --foreground: 30 80% 95%;
+    --card: 247 40% 14%;
+    --card-foreground: 30 80% 95%;
+    --primary: 24 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 247 30% 20%;
+    --secondary-foreground: 30 80% 95%;
+    --muted: 247 30% 18%;
+    --muted-foreground: 30 30% 60%;
+    --accent: 44 100% 65%;
+    --accent-foreground: 247 40% 16%;
+    --border: 247 30% 25%;
+    --input: 247 30% 25%;
+    --ring: 24 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    background-color: #FFF8F1;
+  }
+}

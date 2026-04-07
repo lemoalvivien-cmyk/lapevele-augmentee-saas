@@ -1,0 +1,43 @@
+{
+  "name": "BusinessOffer",
+  "type": "object",
+  "description": "Offre B2B publiée par une entreprise — produit, service, capacité disponible",
+  "properties": {
+    "business_profile_id": { "type": "string", "title": "Profil entreprise" },
+    "user_id": { "type": "string", "title": "Utilisateur" },
+    "titre": { "type": "string", "title": "Intitulé de l'offre", "maxLength": 120 },
+    "description": { "type": "string", "title": "Description", "maxLength": 1000 },
+    "type_offre": {
+      "type": "string", "title": "Type d'offre",
+      "enum": ["produit","service","sous_traitance","partenariat","formation","autre"],
+      "enumLabels": ["Produit","Service","Sous-traitance","Partenariat","Formation","Autre"]
+    },
+    "secteur": { "type": "string", "title": "Secteur" },
+    "prix": { "type": "number", "title": "Prix indicatif (€)" },
+    "unite_prix": {
+      "type": "string", "title": "Unité",
+      "enum": ["heure","jour","forfait","mois","unite","sur_devis"],
+      "enumLabels": ["/ heure","/ jour","Forfait","/ mois","/ unité","Sur devis"]
+    },
+    "commune": { "type": "string", "title": "Commune" },
+    "perimetre": { "type": "string", "title": "Zone de couverture" },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["actif","pause","archive"],
+      "enumLabels": ["Actif","En pause","Archivé"],
+      "default": "actif"
+    },
+    "images": { "type": "array", "title": "Images", "items": { "type": "string" } },
+    "tags": { "type": "array", "title": "Tags", "items": { "type": "string" } },
+    "nb_vues": { "type": "number", "title": "Vues", "default": 0 },
+    "nb_contacts": { "type": "number", "title": "Contacts reçus", "default": 0 },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date de publication" }
+  },
+  "required": ["user_id", "titre", "type_offre", "commune"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": true,
+    "update": { "user_condition": { "field": "user_id" } },
+    "delete": { "user_condition": { "field": "user_id" } }
+  }
+}

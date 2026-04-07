@@ -1,0 +1,27 @@
+{
+  "name": "AffinityScore",
+  "type": "object",
+  "description": "Score d'affinité calculé entre deux profils MatchProfile",
+  "properties": {
+    "profile_a_id": { "type": "string", "title": "Profil A (user_id)" },
+    "profile_b_id": { "type": "string", "title": "Profil B (user_id)" },
+    "score": { "type": "number", "title": "Score 0-100", "default": 0 },
+    "facteurs": {
+      "type": "object", "title": "Détail des facteurs",
+      "properties": {
+        "secteur_complementaire": { "type": "number" },
+        "commune_proche": { "type": "number" },
+        "interets_communs": { "type": "number" },
+        "offre_besoin_match": { "type": "number" }
+      }
+    },
+    "computed_at": { "type": "string", "format": "date-time", "title": "Calculé le" }
+  },
+  "required": ["profile_a_id", "profile_b_id", "score"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "authenticated": true } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

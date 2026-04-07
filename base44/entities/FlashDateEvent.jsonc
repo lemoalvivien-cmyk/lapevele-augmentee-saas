@@ -1,0 +1,40 @@
+{
+  "name": "FlashDateEvent",
+  "type": "object",
+  "description": "Événement Flash Date pro — rencontres networking structurées en Pévèle",
+  "properties": {
+    "titre": { "type": "string", "title": "Titre de l'événement" },
+    "description": { "type": "string", "title": "Description", "maxLength": 800 },
+    "date_debut": { "type": "string", "format": "date-time", "title": "Date et heure" },
+    "date_fin": { "type": "string", "format": "date-time", "title": "Fin" },
+    "lieu": { "type": "string", "title": "Lieu" },
+    "commune": { "type": "string", "title": "Commune" },
+    "format": {
+      "type": "string", "title": "Format",
+      "enum": ["presentiel","visio","hybride"],
+      "enumLabels": ["Présentiel","100% Visio","Hybride"]
+    },
+    "capacite_max": { "type": "number", "title": "Capacité maximale" },
+    "nb_inscrits": { "type": "number", "title": "Inscrits", "default": 0 },
+    "prix_billet": { "type": "number", "title": "Prix billet (€, 0=gratuit)", "default": 0 },
+    "stripe_price_id": { "type": "string", "title": "Stripe Price ID" },
+    "duree_round_min": { "type": "number", "title": "Durée par round (min)", "default": 7 },
+    "nb_rounds": { "type": "number", "title": "Nombre de rounds", "default": 8 },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["draft","ouvert","complet","passe","annule"],
+      "enumLabels": ["Brouillon","Inscriptions ouvertes","Complet","Passé","Annulé"],
+      "default": "draft"
+    },
+    "image_url": { "type": "string", "title": "Image de couverture" },
+    "created_by": { "type": "string", "title": "Créé par (user_id)" },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["titre", "date_debut", "lieu", "commune"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": true,
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

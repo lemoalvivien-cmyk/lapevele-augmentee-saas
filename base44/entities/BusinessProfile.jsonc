@@ -1,0 +1,39 @@
+{
+  "name": "BusinessProfile",
+  "type": "object",
+  "description": "Profil entreprise / indépendant pour la mise en relation B2B WIINUP",
+  "properties": {
+    "user_id": { "type": "string", "title": "Identifiant utilisateur" },
+    "nom_entreprise": { "type": "string", "title": "Nom de l'entreprise" },
+    "siret": { "type": "string", "title": "SIRET", "maxLength": 14 },
+    "secteur": {
+      "type": "string", "title": "Secteur d'activité",
+      "enum": ["agriculture","artisanat","batiment","commerce","consulting","it_numerique","industrie","sante","transport","autre"],
+      "enumLabels": ["Agriculture","Artisanat","Bâtiment","Commerce","Consulting","IT & Numérique","Industrie","Santé","Transport","Autre"]
+    },
+    "description": { "type": "string", "title": "Présentation", "maxLength": 800 },
+    "commune": { "type": "string", "title": "Commune" },
+    "commune_slug": { "type": "string", "title": "Slug commune" },
+    "effectif": {
+      "type": "string", "title": "Effectif",
+      "enum": ["solo","2_5","6_20","21_50","50plus"],
+      "enumLabels": ["Solo / Auto-entrepreneur","2-5 salariés","6-20 salariés","21-50 salariés","50+ salariés"]
+    },
+    "site_web": { "type": "string", "title": "Site web", "format": "uri" },
+    "email_contact": { "type": "string", "title": "Email professionnel", "format": "email" },
+    "telephone": { "type": "string", "title": "Téléphone" },
+    "logo_url": { "type": "string", "title": "URL du logo" },
+    "tags": { "type": "array", "title": "Mots-clés", "items": { "type": "string" } },
+    "is_verified": { "type": "boolean", "title": "Profil vérifié BODACC", "default": false },
+    "reputation_score": { "type": "number", "title": "Score réputation (0-100)", "default": 50 },
+    "visible": { "type": "boolean", "title": "Visible dans l'annuaire", "default": true },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date création" }
+  },
+  "required": ["user_id", "nom_entreprise", "secteur", "commune"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": true,
+    "update": { "user_condition": { "field": "user_id" } },
+    "delete": { "user_condition": { "field": "user_id" } }
+  }
+}

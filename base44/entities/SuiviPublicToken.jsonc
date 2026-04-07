@@ -1,0 +1,38 @@
+{
+  "name": "SuiviPublicToken",
+  "type": "object",
+  "properties": {
+    "dossier": {
+      "type": "string",
+      "title": "Dossier (ID)"
+    },
+    "token": {
+      "type": "string",
+      "title": "Token unique"
+    },
+    "actif": {
+      "type": "boolean",
+      "title": "Actif",
+      "default": true
+    },
+    "expires_at": {
+      "type": "string",
+      "title": "Expiration"
+    }
+  },
+  "required": [
+    "dossier",
+    "token",
+    "expires_at"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": false,
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "AIJobLog",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "title": "Mode IA",
+      "enum": [
+        "public_help",
+        "rewrite_public",
+        "qualify_dossier",
+        "rewrite_mairie",
+        "generate_digest",
+        "generate_victory"
+      ]
+    },
+    "success": {
+      "type": "boolean",
+      "title": "Succ\u00e8s de l'appel"
+    },
+    "commune_id": {
+      "type": "string",
+      "title": "Commune (ID)"
+    },
+    "dossier_id": {
+      "type": "string",
+      "title": "Dossier (ID)"
+    },
+    "latency_ms": {
+      "type": "number",
+      "title": "Latence (ms)",
+      "minimum": 0
+    },
+    "error_code": {
+      "type": "string",
+      "title": "Code erreur"
+    },
+    "error_message": {
+      "type": "string",
+      "title": "Message erreur",
+      "maxLength": 500
+    },
+    "input_length": {
+      "type": "number",
+      "title": "Longueur input (caract\u00e8res)",
+      "minimum": 0
+    },
+    "output_length": {
+      "type": "number",
+      "title": "Longueur output (caract\u00e8res)",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "mode",
+    "success",
+    "latency_ms"
+  ],
+  "rls": {
+    "create": false,
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": false,
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

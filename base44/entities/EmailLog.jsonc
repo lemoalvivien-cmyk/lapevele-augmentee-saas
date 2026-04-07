@@ -1,0 +1,61 @@
+{
+  "name": "EmailLog",
+  "type": "object",
+  "properties": {
+    "to": {
+      "type": "string",
+      "title": "Destinataire"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Sujet"
+    },
+    "status": {
+      "type": "string",
+      "title": "Statut",
+      "enum": [
+        "sent",
+        "failed",
+        "retry_failed"
+      ],
+      "enumLabels": [
+        "Envoy\u00e9",
+        "\u00c9chec",
+        "\u00c9chec apr\u00e8s retry"
+      ]
+    },
+    "error_message": {
+      "type": "string",
+      "title": "Message d'erreur"
+    },
+    "retry_count": {
+      "type": "number",
+      "title": "Nombre de tentatives",
+      "minimum": 0,
+      "maximum": 2
+    }
+  },
+  "required": [
+    "to",
+    "subject",
+    "status"
+  ],
+  "rls": {
+    "create": false,
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

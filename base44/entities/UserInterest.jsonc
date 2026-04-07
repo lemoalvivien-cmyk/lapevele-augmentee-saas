@@ -1,0 +1,71 @@
+{
+  "name": "UserInterest",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "title": "ID utilisateur"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email utilisateur",
+      "format": "email"
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "centres_interet": {
+      "type": "array",
+      "title": "Centres d'intérêt",
+      "items": {
+        "type": "string",
+        "enum": ["emploi", "entrepreneuriat", "evenements", "associations", "services", "b2b", "environnement", "culture", "sport", "solidarite"]
+      }
+    },
+    "objectifs": {
+      "type": "array",
+      "title": "Objectifs déclarés",
+      "items": {
+        "type": "string",
+        "enum": ["chercher_emploi", "creer_entreprise", "developper_business", "rencontres_sociales", "aider_voisins", "suivre_mairie", "b2b_wiinup"]
+      }
+    },
+    "profil_type": {
+      "type": "string",
+      "title": "Type de profil auto-détecté",
+      "enum": ["citoyen", "entrepreneur", "demandeur_emploi", "association", "facilitateur_b2b"],
+      "enumLabels": ["Citoyen", "Entrepreneur", "Demandeur d'emploi", "Association", "Facilitateur B2B"]
+    },
+    "onboarding_complete": {
+      "type": "boolean",
+      "title": "Onboarding complété",
+      "default": false
+    },
+    "dashboard_config_id": {
+      "type": "string",
+      "title": "ID DashboardConfig associé"
+    },
+    "updated_at": {
+      "type": "string",
+      "title": "Dernière mise à jour"
+    }
+  },
+  "required": ["user_id", "email"],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        { "email": "{{user.email}}" },
+        { "user_condition": { "role": "admin" } }
+      ]
+    },
+    "update": {
+      "$or": [
+        { "email": "{{user.email}}" },
+        { "user_condition": { "role": "admin" } }
+      ]
+    },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

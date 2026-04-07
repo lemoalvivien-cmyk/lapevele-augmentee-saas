@@ -1,0 +1,99 @@
+{
+  "name": "UserProfile",
+  "type": "object",
+  "properties": {
+    "user_ref": {
+      "type": "string",
+      "title": "R\u00e9f\u00e9rence utilisateur (email)"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "full_name": {
+      "type": "string",
+      "title": "Nom complet"
+    },
+    "telephone": {
+      "type": "string",
+      "title": "T\u00e9l\u00e9phone",
+      "maxLength": 20
+    },
+    "commune": {
+      "type": "string",
+      "title": "Commune"
+    },
+    "role_local": {
+      "type": "string",
+      "title": "R\u00f4le local",
+      "enum": [
+        "citizen",
+        "operator",
+        "mayor",
+        "deputy",
+        "comms",
+        "interco_admin",
+        "superadmin"
+      ],
+      "enumLabels": [
+        "Citoyen",
+        "Agent",
+        "Maire",
+        "Adjoint",
+        "Communication",
+        "Admin interco",
+        "Super Admin"
+      ],
+      "default": "citizen"
+    },
+    "quartier": {
+      "type": "string",
+      "title": "Quartier"
+    },
+    "centres_interet": {
+      "type": "string",
+      "title": "Centres d'int\u00e9r\u00eat (s\u00e9par\u00e9s par virgule)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "title": "Actif",
+      "default": true
+    }
+  },
+  "required": [
+    "email",
+    "commune"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        {
+          "email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

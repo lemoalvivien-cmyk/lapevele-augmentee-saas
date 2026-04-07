@@ -1,0 +1,30 @@
+{
+  "name": "MarketplaceTransaction",
+  "type": "object",
+  "description": "Transaction marketplace — paiement Stripe Connect avec commission plateforme",
+  "properties": {
+    "listing_id": { "type": "string", "title": "Annonce" },
+    "buyer_user_id": { "type": "string", "title": "Acheteur" },
+    "seller_user_id": { "type": "string", "title": "Vendeur" },
+    "montant_total": { "type": "number", "title": "Montant total (€)" },
+    "commission_plateforme": { "type": "number", "title": "Commission plateforme (€)" },
+    "montant_vendeur": { "type": "number", "title": "Net vendeur (€)" },
+    "stripe_payment_intent": { "type": "string", "title": "Stripe PaymentIntent ID" },
+    "stripe_transfer_id": { "type": "string", "title": "Stripe Transfer ID" },
+    "statut": {
+      "type": "string", "title": "Statut",
+      "enum": ["pending","paid","transferred","refunded","disputed","failed"],
+      "enumLabels": ["En attente","Payé","Transféré vendeur","Remboursé","Litige","Échoué"],
+      "default": "pending"
+    },
+    "notes": { "type": "string", "title": "Notes", "maxLength": 300 },
+    "created_at": { "type": "string", "format": "date-time", "title": "Date transaction" }
+  },
+  "required": ["listing_id", "buyer_user_id", "seller_user_id", "montant_total"],
+  "rls": {
+    "create": { "user_condition": { "authenticated": true } },
+    "read": { "user_condition": { "fields_or": ["buyer_user_id", "seller_user_id"] } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}
