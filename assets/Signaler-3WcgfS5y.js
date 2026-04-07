@@ -1,0 +1,1 @@
+import{j as s,P as r}from"./index-VkAMXF3U.js";import{W as t}from"./WizardDossier-C7M4cXYu.js";import"./camera-BmannErw.js";function n(){return s.jsxs(s.Fragment,{children:[s.jsx(r,{}),s.jsx(t,{typeAction:"signaler"})]})}export{n as default};

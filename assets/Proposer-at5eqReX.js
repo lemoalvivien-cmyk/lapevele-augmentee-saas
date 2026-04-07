@@ -1,0 +1,1 @@
+import{j as r,P as s}from"./index-VkAMXF3U.js";import{W as o}from"./WizardDossier-C7M4cXYu.js";import"./camera-BmannErw.js";function p(){return r.jsxs(r.Fragment,{children:[r.jsx(s,{}),r.jsx(o,{typeAction:"proposer"})]})}export{p as default};
